@@ -1,8 +1,8 @@
-import static org.hamcrest.Matchers.is;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
-
+import static org.hamcrest.CoreMatchers.is;
 import java.util.Arrays;
 
 import org.junit.Before;
@@ -53,30 +53,35 @@ public class AbstractImportCheckerTest {
         new AbstractImportChecker.DottedPath(null);
     }
 
+    @Test
     public void sameDottedValuesAreEqual() {
         final AbstractImportChecker.DottedPath dp1 = new AbstractImportChecker.DottedPath("java.util.Date");
         final AbstractImportChecker.DottedPath dp2 = new AbstractImportChecker.DottedPath("java.util.Date");
         assertEquals(dp1, dp2);
     }
 
+    @Test
     public void sameDifferentDottedValuesAreNotEqual() {
         final AbstractImportChecker.DottedPath dp1 = new AbstractImportChecker.DottedPath("java.util.Date");
         final AbstractImportChecker.DottedPath dp2 = new AbstractImportChecker.DottedPath("java.util.Date2");
         assertNotEquals(dp1, dp2);
     }
 
+    @Test
     public void duplicatePathIsNotChild() {
         final AbstractImportChecker.DottedPath dp1 = new AbstractImportChecker.DottedPath("java.util.Date");
         final AbstractImportChecker.DottedPath dp2 = new AbstractImportChecker.DottedPath("java.util.Date");
         assertThat(dp1.isChildOf(dp2), is(false));
     }
 
+    @Test
     public void importIsChildOfPackage() {
         final AbstractImportChecker.DottedPath parent = new AbstractImportChecker.DottedPath("java.util");
         final AbstractImportChecker.DottedPath child = new AbstractImportChecker.DottedPath("java.util.Date");
         assertThat(child.isChildOf(parent), is(true));
     }
 
+    @Test
     public void subPackageIsChildOfPackage() {
         final AbstractImportChecker.DottedPath parentPackage = new AbstractImportChecker.DottedPath("java.util");
         final AbstractImportChecker.DottedPath childPackage = new AbstractImportChecker.DottedPath("java.util.concurrent");

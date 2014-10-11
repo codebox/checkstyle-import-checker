@@ -93,7 +93,7 @@ public abstract class AbstractImportChecker extends Check {
         @Override
         public boolean equals(final Object that) {
             if (that instanceof DottedPath) {
-                return ((DottedPath) that).equals(path);
+                return ((DottedPath) that).path.equals(path);
             }
             return false;
         }
